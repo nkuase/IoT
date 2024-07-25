@@ -1,30 +1,27 @@
-/******************************************
- *Website: www.elegoo.com
- * 
- *Time:2017.12.12
- *
- ******************************************/
+int ledPin = 13;      // LED pin on arduino
+int detectorPin = 3;  // obstacle avoidance sensor interface
+int val;              // variable to store result
+//int enablePin = 2;  // sensor enable interface (EN)
 
-int Led=13;//define LED port
-int buttonpin=3; //define switch port
-int val;//define digital variable val
-
-void  setup()
+void setup()
 {
-  pinMode(Led,OUTPUT);//define LED as a output port
-  pinMode(buttonpin,INPUT);//define switch as a output port
+  pinMode(ledPin, OUTPUT);  // Define LED as output interface
+  pinMode(detectorPin, INPUT);  // Define obstacle avoidance sensor as input interface
+  
+  // [uncomment and remove jumper on module to use enable pin (EN)]
+  //pinMode(enablePin, OUTPUT);
+  //digitalWrite(enablePin, HIGH);  // Enable sensor
 }
 
-void  loop()
-{ 
-  val=digitalRead(buttonpin);//read the value of the digital interface 3 assigned to val 
-  if(val==HIGH)//when the switch sensor have signal, LED blink
+void loop()
+{
+  val = digitalRead(detectorPin); // Read value from sensor
+  if (val == LOW) // When the sensor detects an obstacle, the LED on the Arduino lights up
   {
-    digitalWrite(Led,HIGH);
+    digitalWrite(ledPin, HIGH);
   }
   else
   {
-    digitalWrite(Led,LOW);
+    digitalWrite(ledPin, LOW);
   }
 }
-
